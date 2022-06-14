@@ -1,58 +1,115 @@
 import React from "react";
-import { useState } from "react";
 
-function LoginPage() {
-  const [name, setName] = useState("");
-  return (
-    <>
-      <div className="min-h-screen bg-gray-50 flex-col justify-center">
-        <div className="max-w-md w-full mx-auto mt-4 bg-white p-8 border border-gray-300">
-          <form action="" className="space-y-6">
-            <div className="max-w-md w-full mx-auto">
-              <div className="text-center text-3xl font-bold">LOGIN</div>
-            </div>
-            <div>
-              <label
-                htmlFor=""
-                className="text-sm font-bold text-gray-600 block" placeholder="Please enter your email" required
-              >
-                Email
-              </label>
-              <input
-                type="email"
-                className="w-full p-2 border border-gray-300 rounded mt-1"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor=""
-                className="text-sm font-bold text-gray-600 block"
-              >
-                Password
-              </label>
-              <input
-                type="password"
-                className="w-full p-2 border border-gray-300 rounded mt-1"
-              />
-            </div>
-            <div>
-              <a href="/" className="ml-2 text-sm text-gray-500">
-                FORGOT YOUR PASSWORD ?
-              </a>
-            </div>
-            <div className="flex justify-center md:order-2">
-              <button
-                type="button"
-                className="text-white bg-gray-900 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0"
-              >
-                LOGIN
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </>
-  );
+export default function LoginPage() {
+  return <div></div>;
 }
 
-export default LoginPage;
+// import React from "react";
+// import WelcomeContainer from "../layouts/welcomePage/WelcomeContainer";
+
+// function LoginPage() {
+//   const [showModal, setShowModal] = React.useState(false);
+//   return (
+//     <>
+//       <WelcomeContainer />
+
+//       <button
+//         className="text-white bg-gray-900 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0"
+//         type="button"
+//         onClick={() => setShowModal(true)}
+//       >
+//         LOGIN
+//       </button>
+//       {showModal ? (
+//         <>
+//           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+//             <div className="relative w-auto my-6 mx-auto max-w-sm">
+//               {/*content*/}
+//               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none pr-8 pl-8">
+//                 {/*header*/}
+//                 <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
+//                   <h3 className="text-center text-2xl font-bold">LOGIN</h3>
+//                   <button
+//                     className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+//                     onClick={() => setShowModal(false)}
+//                   ></button>
+//                 </div>
+//                 {/*body*/}
+//                 <div>
+//                   <label
+//                     for="email"
+//                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+//                   >
+//                     Email
+//                   </label>
+//                   <input
+//                     type="email"
+//                     name="email"
+//                     id="email"
+//                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+//                     placeholder="Please enter your Email"
+//                     required
+//                   />
+//                 </div>
+//                 <div className="mt-3">
+//                   <label
+//                     for="password"
+//                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+//                   >
+//                     Password
+//                   </label>
+//                   <input
+//                     type="password"
+//                     name="password"
+//                     id="password"
+//                     placeholder="••••••••"
+//                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+//                     required
+//                   />
+//                 </div>
+//                 <div className="flex justify-between">
+//                   <a
+//                     href="/forgotpassword"
+//                     class="text-xs text-gray-900 hover:underline mt-3"
+//                   >
+//                     FORGOT YOUR PASSWORD ?
+//                   </a>
+//                 </div>
+
+//                 {/*footer*/}
+//                 <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+//                   <button
+//                     className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+//                     type="button"
+//                     onClick={() => setShowModal(false)}
+//                   >
+//                     Close
+//                   </button>
+//                   <button
+//                     className="text-white bg-gray-900 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0"
+//                     type="button"
+//                     onClick={() => setShowModal(false)}
+//                   >
+//                     LOGIN
+//                   </button>
+//                   <div className="flex justify-between">
+//             <a
+//               href="/signup"
+//               class="text-xs text-gray-900 hover:underline mt-3"
+//             >
+//               CREATE AN ACCOUNT
+//             </a>
+//           </div>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//           <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+//         </>
+//       ) : null}
+
+//     </>
+//   );
+// }
+
+// export default LoginPage;

@@ -17,7 +17,7 @@ const WelcomeStyle = styled.div`
     url(${backgroundImg});
   background-size: cover;
   background-position: 50%;
-  background-repeat: no-repeat, repeat;
+  background-repeat: no-repeat;
 `;
 
 function WelcomeContainer() {

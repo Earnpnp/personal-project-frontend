@@ -1,14 +1,14 @@
-import React from 'react'
-import Footer from '../layouts/Footer'
-import Header from "../layouts/Header"
+import React from "react";
+import Footer from "../layouts/Footer";
+import Header from "../layouts/Header";
 
 function DeckPage() {
   return (
     <>
-    <Header />
-    <Footer />
+      <Header />
+      <Footer />
     </>
-  )
+  );
 }
 
-export default DeckPage
+export default DeckPage;
