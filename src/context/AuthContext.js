@@ -17,9 +17,11 @@ function AuthContextProvider({ children }) {
     const fetchMe = async () => {
       try {
         const token = getAccessToken();
+        console.log(token);
         if (token) {
           const resMe = await axios.get("/users/me");
           setUser(resMe.data.user);
+          console.log(resMe.data);
         }
       } catch (err) {
         removeAccessToken();
@@ -31,20 +33,25 @@ function AuthContextProvider({ children }) {
   }, []);
 
   const signUp = async (input) => {
-    const res = await axios.post("/signup", input);
+    const res = await axios.post("/auth/signup", input);
     setAccessToken(res.data.token);
+    console.log(input);
     // const resMe = await axios.get("/users/me");
     // setUser(resMe.data.user);
   };
 
   const login = async (email, password) => {
-    const res = await axios.post("/login", { email, password });
+    const res = await axios.post("/auth/login", { email, password });
+    console.log(res);
+    console.log(res.data);
+    console.log(res.data.token);
     setAccessToken(res.data.token);
     // const resMe = await axios.get("/users/me");
     // setUser(resMe.data.user);
   };
 
   const logout = () => {
+    console.log("trigger");
     removeAccessToken();
     setUser(null);
   };

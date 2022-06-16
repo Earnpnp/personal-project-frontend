@@ -1,20 +1,12 @@
 import React from "react";
 
-function Card(props) {
-  const { products, nameProduct, description, hdlAddClick } = props;
-  console.log(products);
+function Card({ src,  nameProduct, description, hdlAddClick }) {
 
   return (
     <>
       <div className="flex justify-center">
         <div className="rounded-lg shadow-lg bg-white max-w-sm">
-          <a href="/">
-            <img
-              className="rounded-t-lg"
-              src="https://mdbootstrap.com/img/new/standard/nature/184.jpg"
-              alt=""
-            />
-          </a>
+          <img className="" src={src} alt="" />
           <div className="p-6">
             <h5 className="text-gray-900 text-xl font-medium mb-2">
               {nameProduct}

@@ -1,9 +1,29 @@
-import React from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useAuth } from "../../../context/AuthContext";
 
 function CartContent() {
+  const [cart, setCart] = useState([]);
+  const { user } = useAuth();
+  console.log(user);
+
+  useEffect(() => {
+    const fetchCart = async () => {
+      try {
+        const resCart = await axios.get("/cart/cartId");
+        console.log(resCart.data);
+        console.log("res.data");
+        setCart(resCart.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchCart();
+  }, []);
+  console.log(cart);
   return (
     <>
-      <body className="max-w-screen-lg mx-auto">
+      <div className="max-w-screen-lg mx-auto">
         <div className="py-12">
           <div className="flex shadow-md my-10">
             <div className="w-3/4 bg-white px-10 py-10">
@@ -13,7 +33,7 @@ function CartContent() {
               </div>
               <div className="flex mt-10 mb-5">
                 <h3 className="font-semibold text-gray-600 text-xs uppercase w-1/5">
-                  Product Details
+                  Product
                 </h3>
                 <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5">
                   Quantity
@@ -25,32 +45,37 @@ function CartContent() {
                   Total
                 </h3>
               </div>
-              <div className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
-                <div className="flex w-1/5">
-                  <div className="flex flex-col justify-between ml-4 flex-grow">
-                    <span className="font-bold text-sm">Iphone 6S</span>
-                  </div>
-                </div>
 
-                <div className="flex justify-center w-1/5 items-center">
-                  <span class="font-semibold">+</span>
-                  <input
-                    className="mx-2 border-transparent text-center w-8"
-                    type="text"
-                    value="1"
-                  />
-                  <span class="font-semibold">-</span>
+              {cart?.map((el) => (
+                <div className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
+                  <div className="flex w-1/5">
+                    <div className="flex flex-col justify-between ml-4 flex-grow">
+                      <span className="font-bold text-sm">
+                        {el.Product.nameProduct}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="flex justify-center w-1/5 items-center">
+                    <span className="font-semibold">+</span>
+                    <input
+                      className="mx-2 border-transparent text-center w-8"
+                      type="text"
+                      value="1"
+                    />
+                    <span className="font-semibold">-</span>
+                  </div>
+                  <span className="text-center w-1/5 font-semibold text-sm">
+                    {el.Product.price}
+                  </span>
+                  <span className="text-center w-1/5 font-semibold text-sm">
+                    $400.00
+                  </span>
+                  <span className="text-center w-1/5 font-semibold text-sm text-red-600">
+                    X
+                  </span>
                 </div>
-                <span className="text-center w-1/5 font-semibold text-sm">
-                  $400.00
-                </span>
-                <span className="text-center w-1/5 font-semibold text-sm">
-                  $400.00
-                </span>
-                <span className="text-center w-1/5 font-semibold text-sm text-red-600">
-                  X
-                </span>
-              </div>
+              ))}
 
               <a
                 href="/allproduct"
@@ -81,7 +106,7 @@ function CartContent() {
             </div>
           </div>
         </div>
-      </body>
+      </div>
     </>
   );
 }

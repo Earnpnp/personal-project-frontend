@@ -27,10 +27,8 @@ function ProductCard(props) {
       {products?.map((el) => {
         return (
           <Card
-            addItems={addItems}
-            removeItems={removeItems}
-            products={products}
             key={el?.id}
+            src={el?.img}
             nameProduct={el?.nameProduct}
             description={el?.description}
             hdlAddClick={() => hdlAddClick("1", el.id)}

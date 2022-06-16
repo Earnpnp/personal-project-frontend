@@ -19,6 +19,7 @@ function WelcomeHeader({}) {
       await signUp({
         name,
         email,
+        phoneNumber,
         password,
         confirmPassword,
       });
@@ -29,6 +30,7 @@ function WelcomeHeader({}) {
 
   const handleClickLogin = async () => {
     try {
+      console.log("fffffffff");
       await login(email, password);
       setSignUpModal(false);
     } catch (err) {

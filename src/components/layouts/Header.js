@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 
-import React from "react";
 // import styled from "styled-components";
 // import logoImage from "../../assets/images/logoImage.jpg";
 
@@ -13,6 +13,7 @@ import React from "react";
 // `;
 
 function Header(props) {
+  const [search, setSearch] = useState("");
   const navigate = useNavigate();
   const { countCart } = props;
   const handleViewCartBtn = () => {
@@ -28,6 +29,8 @@ function Header(props) {
         </div>
         <div className="form-control">
           <input
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
             type="text"
             placeholder="Search"
             className="input input-bordered"
@@ -92,9 +95,6 @@ function Header(props) {
                   <a className="justify-between" href="/editprofile">
                     Edit Profile
                   </a>
-                </li>
-                <li>
-                  <a href="/addaddress">Address</a>
                 </li>
                 <li>
                   <a href="/">Logout</a>
