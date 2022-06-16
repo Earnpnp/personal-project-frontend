@@ -1,14 +1,8 @@
-import React from 'react'
-import Footer from "../Footer";
-import Header from "../Header";
-
-
-
+import React from "react";
 
 function EditProfileContent() {
   return (
     <>
-<Header />
       <div class="mt-10 sm:mt-0">
         <div class="md:grid md:grid-cols-3 md:gap-6">
           <div class="md:col-span-1">
@@ -170,10 +164,8 @@ function EditProfileContent() {
         </div>
       </div>
       ;
-      <Footer />
-
     </>
-  )
+  );
 }
 
-export default EditProfileContent
+export default EditProfileContent;

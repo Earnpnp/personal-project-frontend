@@ -1,79 +1,51 @@
 import React from "react";
+import { useState } from "react";
+import Card from "../../../ui/Card";
 import ProductCard from "../../common/ProductCard";
-
+import Header from "../../layouts/Header";
 
 function AllProductContent() {
+  const [cartItems, setCartItems] = useState([]);
+
+  const addItem = (product) => {
+    console.log(product);
+    const idx = cartItems.findIndex((x) => x.id === product.id);
+    const newCart = [...cartItems];
+    if (idx > -1) {
+      newCart[idx] = { ...newCart[idx], qty: newCart[idx].qty + 1 };
+    } else {
+      newCart.push({ ...product, qty: 1 });
+    }
+    setCartItems(newCart);
+  };
+
+  const removeItem = (product) => {
+    if (product.qty === 1) {
+      setCartItems(cartItems.filter((x) => x.id !== product.id));
+    } else {
+      setCartItems(
+        cartItems.map((x) =>
+          x.id === product.id ? { ...product, qty: product.qty - 1 } : x
+        )
+      );
+    }
+  };
+
   return (
     <>
-      <div className="flex ml-20">
-        <div className="container flex-1 w-64">
-          <section className="mb-32 text-gray-800 background-radial-gradient">
-            <div className="container mx-auto mt-10">
-              <p className="font-bold pb-6">ARE YOU READY FOR SKATE ?</p>
-              <iframe
-                width="560"
-                height="315"
-                src="https://www.youtube.com/embed/1vPoY41B6Wg"
-                title="YouTube video player"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              ></iframe>
-              <p className="pt-6">Location: Pink park</p>
-            </div>
-          </section>
+      <Header countCart={cartItems.length} />
+      <div className="max-w-screen-lg mx-auto">
+        <div className="container flex">
+          <p className="font-bold mt-8 mb-4">All Products</p>
         </div>
 
-        <div className="flex-column ml-96 mr-36">
-          <div>
-            <p className="font-bold mt-10">Best Sellers</p>
-          </div>
-          <div className="mt-6">
-            <ProductCard />
-          </div>
-
-
-          <div className="flex-column">
-            <div>
-            <p className="font-bold mt-10 mb-10">All Products</p>
-            </div>
-            <span className="mt-80">
-              <a
-                href="/deck"
-                className="text-white bg-black hover:bg-gray-700 p-2 m-3 rounded"
-              >
-                DECK
-              </a>
-              <a
-                href="/truck"
-                className="text-white bg-black hover:bg-gray-700 p-2 m-3 rounded"
-              >
-                TRUCK
-              </a>
-              <a
-                href="/wheel"
-                className="text-white bg-black hover:bg-gray-700 p-2 m-3 rounded"
-              >
-                WHEEL
-              </a>
-              <a
-                href="/bearing"
-                className="text-white bg-black hover:bg-gray-700 p-2 m-3 rounded"
-              >
-                BEARING
-              </a>
-              <a
-                href="/giptape"
-                className="text-white bg-black hover:bg-gray-700 p-2 m-3 rounded"
-              >
-                GIP TAPE
-              </a>
-              <a
-                href="/hardware"
-                className="text-white bg-black hover:bg-gray-700 p-2 m-3 rounded"
-              >
-                HARDWARE
-              </a>
-            </span>
-          </div>
+        <div className="grid grid-cols-3 gap-10">
+          <ProductCard
+            cartItems={cartItems}
+            addItem={addItem}
+            onRemove={removeItem}
+          />
+          <Card addItem={addItem} onRemove={removeItem} />
         </div>
       </div>
     </>

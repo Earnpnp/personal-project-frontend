@@ -1,9 +1,16 @@
-import React from 'react'
+import Footer from "../../layouts/Footer";
+import Header from "../../layouts/Header";
+import React from "react";
+import EditProfileContent from "../../layouts/content/EditProfileContent";
 
 function EditProfile() {
   return (
-    <div>EditProfile</div>
-  )
+    <>
+      <Header />
+      <EditProfileContent />
+      <Footer />
+    </>
+  );
 }
 
-export default EditProfile
+export default EditProfile;

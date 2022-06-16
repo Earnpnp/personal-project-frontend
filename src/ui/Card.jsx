@@ -1,11 +1,14 @@
 import React from "react";
 
-function Card({ nameProduct, description }) {
+function Card(props) {
+  const { products, nameProduct, description, hdlAddClick } = props;
+  console.log(products);
+
   return (
     <>
-      <div className="flex column justify-center">
+      <div className="flex justify-center">
         <div className="rounded-lg shadow-lg bg-white max-w-sm">
-          <a href="#!">
+          <a href="/">
             <img
               className="rounded-t-lg"
               src="https://mdbootstrap.com/img/new/standard/nature/184.jpg"
@@ -16,14 +19,13 @@ function Card({ nameProduct, description }) {
             <h5 className="text-gray-900 text-xl font-medium mb-2">
               {nameProduct}
             </h5>
-            <p className="text-gray-700 text-base mb-4">
-              {description}
-            </p>
+            <p className="text-gray-700 text-base mb-4">{description}</p>
             <button
               type="button"
               className=" inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+              onClick={hdlAddClick}
             >
-              Button
+              Add to Cart
             </button>
           </div>
         </div>

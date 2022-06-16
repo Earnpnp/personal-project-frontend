@@ -14,10 +14,10 @@ import BearingPage from "../components/pages/BearingPage";
 import GipTapPage from "../components/pages/GipTapePage";
 import HardwarePage from "../components/pages/HardwarePage";
 import ProductDetailPage from "../components/pages/ProductDetailPage";
-import AddAddressContent from "../components/layouts/content/AddAddressContent";
-import EditProfileContent from "../components/layouts/content/EditProfileContent";
+import EditProfilePage from "../components/pages/user/EditProfilePage";
 import AddProductPage from "../components/pages/admin/AddProductPage";
 import CartPage from "../components/pages/CartPage";
+import AddAddressPage from "../components/pages/user/AddAddressPage";
 // PROFILE
 
 // CART
@@ -46,8 +46,8 @@ function Router() {
       <Route path="/hardware" element={<HardwarePage />} />
       <Route path="/contactus" element={<ContactUsPage />} />
       <Route path="/productdetail" element={<ProductDetailPage />} />
-      <Route path="/addaddress" element={<AddAddressContent />} />
-      <Route path="/editprofile" element={<EditProfileContent />} />
+      <Route path="/addaddress" element={<AddAddressPage />} />
+      <Route path="/editprofile" element={<EditProfilePage />} />
       <Route path="/addproduct" element={<AddProductPage />} />
       <Route path="/cart" element={<CartPage />} />
     </Routes>
