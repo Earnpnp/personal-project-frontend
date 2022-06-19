@@ -1,9 +1,16 @@
-import React from 'react'
+import React from "react";
+import Header from "../layouts/Header";
+import Footer from "../layouts/Footer";
+import PaymentContent from "../layouts/content/PaymentContent";
 
 function PaymentPage() {
   return (
-    <div>PaymentPage</div>
-  )
+    <>
+      <Header />
+      <PaymentContent />
+      <Footer />
+    </>
+  );
 }
 
-export default PaymentPage
+export default PaymentPage;

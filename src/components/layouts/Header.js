@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
 import React, { useState } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 // import styled from "styled-components";
 // import logoImage from "../../assets/images/logoImage.jpg";
@@ -14,6 +16,7 @@ import React, { useState } from "react";
 
 function Header(props) {
   const [search, setSearch] = useState("");
+  const { logout } = useContext(AuthContext);
   const navigate = useNavigate();
   const { countCart } = props;
   const handleViewCartBtn = () => {
@@ -97,7 +100,9 @@ function Header(props) {
                   </a>
                 </li>
                 <li>
-                  <a href="/">Logout</a>
+                  <a href="/" onClick={logout}>
+                    Logout
+                  </a>
                 </li>
               </ul>
             </div>

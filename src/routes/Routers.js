@@ -12,6 +12,8 @@ import ProductDetailPage from "../components/pages/ProductDetailPage";
 import EditProfilePage from "../components/pages/user/EditProfilePage";
 import AddProductPage from "../components/pages/admin/AddProductPage";
 import CartPage from "../components/pages/CartPage";
+import PaymentPage from "../components/pages/PaymentPage";
+import SuccessPage from "../components/pages/SuccessPage";
 
 // PROFILE
 
@@ -20,10 +22,6 @@ import CartPage from "../components/pages/CartPage";
 // -------- ADMIN --------
 
 // PRODUCT
-
-// ORDER
-
-// CUSTOMER
 
 function Router() {
   return (
@@ -38,6 +36,8 @@ function Router() {
       <Route path="/editprofile" element={<EditProfilePage />} />
       <Route path="/addproduct" element={<AddProductPage />} />
       <Route path="/cart" element={<CartPage />} />
+      <Route path="/payment" element={<PaymentPage />} />
+      <Route path="/success" element={<SuccessPage />} />
     </Routes>
   );
 }

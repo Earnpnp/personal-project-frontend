@@ -4,7 +4,6 @@ import { getProduct } from "../../api/product";
 import axios from "axios";
 
 function ProductCard(props) {
-  const { addItems, removeItems } = props;
   const [products, setProducts] = useState([]);
   useEffect(() => {
     const fetch = async () => {

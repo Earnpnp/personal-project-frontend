@@ -1,11 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useAuth } from "../../../context/AuthContext";
+// import { useAuth } from "../../../context/AuthContext";
 
 function CartContent() {
   const [cart, setCart] = useState([]);
-  const { user } = useAuth();
-  console.log(user);
+  // const { user } = useAuth();
 
   useEffect(() => {
     const fetchCart = async () => {
@@ -20,6 +19,13 @@ function CartContent() {
     };
     fetchCart();
   }, []);
+
+  const hdlDeleteClick = async (id) => {
+    const params = id;
+    const res = await axios.delete(`/cart/${id}`);
+    console.log(res);
+  };
+
   console.log(cart);
   return (
     <>
@@ -42,7 +48,7 @@ function CartContent() {
                   Price
                 </h3>
                 <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5">
-                  Total
+                  Sub Total
                 </h3>
               </div>
 
@@ -71,9 +77,12 @@ function CartContent() {
                   <span className="text-center w-1/5 font-semibold text-sm">
                     $400.00
                   </span>
-                  <span className="text-center w-1/5 font-semibold text-sm text-red-600">
+                  <button
+                    className="text-center w-1/5 font-semibold text-sm text-red-600"
+                    onClick={() => hdlDeleteClick(el.id)}
+                  >
                     X
-                  </span>
+                  </button>
                 </div>
               ))}
 
@@ -90,8 +99,18 @@ function CartContent() {
                 Order Summary
               </h1>
               <div className="flex justify-between mt-10 mb-5">
-                <span className="font-semibold text-sm uppercase">Items 3</span>
+                <span className="font-semibold text-sm uppercase">Total</span>
                 <span className="font-semibold text-sm">590$</span>
+              </div>
+              <div className="flex justify-between mt-10 mb-5">
+                <span className="font-semibold text-sm uppercase">
+                  Shipping
+                </span>
+                <span className="font-semibold text-sm">Free</span>
+              </div>
+              <div className="flex justify-between mt-10 mb-5">
+                <span className="font-semibold text-sm uppercase">Address</span>
+                {/* <div className="font-semibold text-sm">{user.address}</div> */}
               </div>
 
               <div className="border-t mt-8">

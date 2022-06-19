@@ -51,7 +51,6 @@ function AuthContextProvider({ children }) {
   };
 
   const logout = () => {
-    console.log("trigger");
     removeAccessToken();
     setUser(null);
   };
