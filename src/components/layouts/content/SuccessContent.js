@@ -3,7 +3,7 @@ import React from "react";
 function SuccessContent() {
   return (
     <>
-      <h1>Successfully</h1>
+      <h1 className="text-text-btn">Successfully</h1>
     </>
   );
 }

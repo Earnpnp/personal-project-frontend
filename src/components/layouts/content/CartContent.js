@@ -1,32 +1,60 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-// import { useAuth } from "../../../context/AuthContext";
+import { useAuth } from "../../../context/AuthContext";
+import { useCart } from "../../../context/CartContext";
 
 function CartContent() {
-  const [cart, setCart] = useState([]);
-  // const { user } = useAuth();
+  // const [cart, setCart] = useState([]);
+  const [count, setCount] = useState(0);
+  const navigate = useNavigate();
+  // const [fetch, setFetch] = useState(false);
+  const { user } = useAuth();
 
-  useEffect(() => {
-    const fetchCart = async () => {
-      try {
-        const resCart = await axios.get("/cart/cartId");
-        console.log(resCart.data);
-        console.log("res.data");
-        setCart(resCart.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchCart();
-  }, []);
+  const { cart, setFetch } = useCart();
 
   const hdlDeleteClick = async (id) => {
     const params = id;
     const res = await axios.delete(`/cart/${id}`);
-    console.log(res);
+    setFetch((prev) => !prev);
   };
 
+  const hdlIncrement = async (id, quantity) => {
+    const total = 1 * quantity + 1;
+    await axios.put(`/cart/${id}`, { total });
+    setFetch((prev) => !prev);
+
+    // setCount(count + 1);
+  };
+
+  const hdlDecrement = async (id, quantity) => {
+    const total = 1 * quantity - 1;
+    await axios.put(`/cart/${id}`, { total });
+    setFetch((prev) => !prev);
+  };
+  const hdlCheckOut = async () => {
+    const createdOrder = await axios.post("/order/addorder", { total });
+
+    for (const el of cart) {
+      await axios.post("/order/orderitem", {
+        productId: el.id,
+        quantity: el.quantity,
+        total: el.quantity * el.Product.price,
+        orderId: createdOrder.data.order.id,
+      });
+      await axios.delete(`/cart/${el.id}`);
+      setFetch((prev) => !prev);
+    }
+
+    navigate(`/payment/${createdOrder.data.order.id}`);
+  };
   console.log(cart);
+
+  const total = cart?.reduce((acc, cur) => {
+    acc += cur.quantity * cur.Product.price;
+    return acc;
+  }, 0);
+
   return (
     <>
       <div className="max-w-screen-lg mx-auto">
@@ -53,39 +81,51 @@ function CartContent() {
               </div>
 
               {cart?.map((el) => (
-                <div className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
-                  <div className="flex w-1/5">
-                    <div className="flex flex-col justify-between ml-4 flex-grow">
-                      <span className="font-bold text-sm">
-                        {el.Product.nameProduct}
-                      </span>
+                <>
+                  <div className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
+                    <div className="flex w-1/5">
+                      <div className="flex flex-col justify-between ml-4 flex-grow">
+                        <span className="font-bold text-sm">
+                          {el.Product.nameProduct}
+                        </span>
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="flex justify-center w-1/5 items-center">
-                    <span className="font-semibold">+</span>
-                    <input
-                      className="mx-2 border-transparent text-center w-8"
-                      type="text"
-                      value="1"
-                    />
-                    <span className="font-semibold">-</span>
+                    <div className="flex justify-center w-1/5 items-center">
+                      <button
+                        className="font-semibold"
+                        onClick={() => hdlDecrement(el.id, el.quantity)}
+                      >
+                        -
+                      </button>
+                      <h1 className="mx-2 border-transparent text-center w-8">
+                        {el.quantity}
+                      </h1>
+
+                      <button
+                        className="font-semibold"
+                        onClick={() => {
+                          hdlIncrement(el.id, el.quantity);
+                        }}
+                      >
+                        +
+                      </button>
+                    </div>
+                    <span className="text-center w-1/5 font-semibold text-sm">
+                      {el.Product.price}
+                    </span>
+                    <span className="text-center w-1/5 font-semibold text-sm">
+                      {el.Product.price * el.quantity}
+                    </span>
+                    <button
+                      className="text-center w-1/5 font-semibold text-sm text-red-600"
+                      onClick={() => hdlDeleteClick(el.id)}
+                    >
+                      X
+                    </button>
                   </div>
-                  <span className="text-center w-1/5 font-semibold text-sm">
-                    {el.Product.price}
-                  </span>
-                  <span className="text-center w-1/5 font-semibold text-sm">
-                    $400.00
-                  </span>
-                  <button
-                    className="text-center w-1/5 font-semibold text-sm text-red-600"
-                    onClick={() => hdlDeleteClick(el.id)}
-                  >
-                    X
-                  </button>
-                </div>
+                </>
               ))}
-
               <a
                 href="/allproduct"
                 className="font-semibold text-indigo-600 text-sm mt-8"
@@ -100,7 +140,7 @@ function CartContent() {
               </h1>
               <div className="flex justify-between mt-10 mb-5">
                 <span className="font-semibold text-sm uppercase">Total</span>
-                <span className="font-semibold text-sm">590$</span>
+                <span className="font-semibold text-sm">{total}</span>
               </div>
               <div className="flex justify-between mt-10 mb-5">
                 <span className="font-semibold text-sm uppercase">
@@ -110,15 +150,18 @@ function CartContent() {
               </div>
               <div className="flex justify-between mt-10 mb-5">
                 <span className="font-semibold text-sm uppercase">Address</span>
-                {/* <div className="font-semibold text-sm">{user.address}</div> */}
+                <div className="font-semibold text-sm">{user?.address}</div>
               </div>
 
               <div className="border-t mt-8">
                 <div className="flex font-semibold justify-between py-6 text-sm uppercase">
                   <span>Total cost</span>
-                  <span>$600</span>
+                  <span>{total}</span>
                 </div>
-                <button className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">
+                <button
+                  className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full"
+                  onClick={hdlCheckOut}
+                >
                   Checkout
                 </button>
               </div>

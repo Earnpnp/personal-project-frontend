@@ -1,36 +1,34 @@
-import React from 'react'
+import React, { createContext, useState, useEffect } from "react";
+import { useContext } from "react";
+import axios from "../config/axios";
 
+const CartContext = createContext();
+function CartContextProvider({ children }) {
+  const [cart, setCart] = useState(null);
+  const [fetch, setFetch] = useState(false);
 
-function CartContext() {
-
-    // const addCart = (product) => {
-    //     const idx = cartItems.findIndex((x) => x.id === product.id)
-    //     const newCart = [...cartItems]
-    //     if (idx -1) {
-    //         newCart[idx] = {...newCart[idx], qty: newCart[idx].qty + 1}
-    //     } else {
-    //         newCart.push({ ...product, qty: 1})
-    //     }
-    //     setCartItems(newCart)
-    // }
-
-    // const removeCart = (product) => {
-    //     if (product.qty === 1) {
-    //         setCartItems(cartItems.filter((x) => x.id !== product.id))
-    //     } else {
-    //         setCartItems(
-    //             cartItems.map((x) =>
-    //             x.id === product.id ? {...product, qty: product.qty - 1 } : x)
-    //         )
-    //     }
-    // }
-
+  useEffect(() => {
+    const fetchCart = async () => {
+      try {
+        const resCart = await axios.get("/cart/cartId");
+        setCart(resCart.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchCart();
+  }, [fetch]);
 
   return (
-   <>
-   
-   </>
-  )
+    <CartContext.Provider value={{ cart, setFetch }}>
+      {children}
+    </CartContext.Provider>
+  );
 }
 
-export default CartContext
+const useCart = () => {
+  const ctx = useContext(CartContext);
+  return ctx;
+};
+export default CartContextProvider;
+export { useCart };

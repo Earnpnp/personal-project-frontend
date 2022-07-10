@@ -17,10 +17,7 @@ function ProductCard(props) {
     const body = { quantity, productId };
     const res = await axios.post("/cart", body);
     // setSelected(true);
-    console.log(body);
   };
-
-  console.log(products);
   return (
     <>
       {products?.map((el) => {

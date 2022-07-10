@@ -1,5 +1,6 @@
 import React from "react";
 import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthContext";
 
 function WelcomeHeader({}) {
@@ -10,6 +11,7 @@ function WelcomeHeader({}) {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loginModal, setLoginModal] = useState(false);
   const [signUpModal, setSignUpModal] = useState(false);
+  const navigate = useNavigate();
 
   const { signUp, login } = useContext(AuthContext);
 
@@ -23,6 +25,7 @@ function WelcomeHeader({}) {
         password,
         confirmPassword,
       });
+      navigate("/allproduct");
     } catch (err) {
       console.log(err);
     }
@@ -30,9 +33,9 @@ function WelcomeHeader({}) {
 
   const handleClickLogin = async () => {
     try {
-      console.log("fffffffff");
       await login(email, password);
       setSignUpModal(false);
+      navigate("/allproduct");
     } catch (err) {
       console.log(err);
     }
@@ -95,6 +98,13 @@ function WelcomeHeader({}) {
                 <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
                   <h3 className="text-center text-2xl font-bold">LOGIN</h3>
                   <button
+                    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    type="button"
+                    onClick={() => setLoginModal(false)}
+                  >
+                    X
+                  </button>
+                  <button
                     className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                     onClick={() => setLoginModal(false)}
                   ></button>
@@ -128,30 +138,22 @@ function WelcomeHeader({}) {
                     type="password"
                     name="password"
                     id="password"
-                    placeholder="••••••••"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
-                <div className="flex justify-between">
+                {/* <div className="flex justify-between">
                   <a
                     href="/forgotpassword"
                     className="text-xs text-gray-900 hover:underline mt-3"
                   >
                     FORGOT YOU R PASSWORD ?
                   </a>
-                </div>
+                </div> */}
 
                 {/*footer*/}
                 <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
-                  <button
-                    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                    type="button"
-                    onClick={() => setLoginModal(false)}
-                  >
-                    Close
-                  </button>
                   <button
                     className="text-white bg-gray-900 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0"
                     type="button"
@@ -159,14 +161,14 @@ function WelcomeHeader({}) {
                   >
                     LOGIN
                   </button>
-                  <div className="flex justify-between">
+                  {/* <div className="flex justify-between">
                     <a
                       href="/signup"
                       className="text-xs text-gray-900 hover:underline mt-3"
                     >
                       CREATE AN ACCOUNT
                     </a>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
@@ -186,7 +188,7 @@ function WelcomeHeader({}) {
                 <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
                   <h3 className="text-center text-2xl font-bold">SIGN UP</h3>
 
-                  <div className="text-center text-m font-bold">
+                  {/* <div className="text-center text-m font-bold">
                     ALREADY HAVE AN ACCOUNT
                     <a href="/login" className="ml-2 text-sm text-gray-500">
                       LOGIN
@@ -195,7 +197,7 @@ function WelcomeHeader({}) {
                   <button
                     className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                     onClick={() => setSignUpModal(false)}
-                  ></button>
+                  ></button> */}
                 </div>
                 {/*body*/}
                 <div>
@@ -238,7 +240,6 @@ function WelcomeHeader({}) {
                     name="email"
                     id="email"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                    placeholder="Please enter your Email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
@@ -254,7 +255,6 @@ function WelcomeHeader({}) {
                     type="password"
                     name="password"
                     id="password"
-                    placeholder="••••••••"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
