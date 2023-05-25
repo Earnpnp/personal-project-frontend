@@ -20,12 +20,13 @@ function EditProfileContent() {
       console.log(err);
     }
   };
+
   return (
     <>
-      <div className="mt-10 sm:mt-0">
-        <div className="md:grid md:grid-cols-3 md:gap-6">
+      <div className="flex justify-center mt-10 mb-10">
+        <div className="">
           <div className="md:col-span-1">
-            <div className="px-4 sm:px-0">
+            <div className="pb-5">
               <h3 className="text-lg font-medium leading-6 text-gray-900">
                 Personal Information
               </h3>
@@ -58,7 +59,7 @@ function EditProfileContent() {
               />
             </div>
 
-            <div className="form-control w-full max-w-xs">
+            {/* <div className="form-control w-full max-w-xs">
               <label className="label">
                 <span className="label-text">Profile Image</span>
               </label>
@@ -68,10 +69,15 @@ function EditProfileContent() {
                 className="input input-bordered input-m w-full max-w-xs"
                 onChange={(e) => setUserImage(e.target.files[0])}
               />
-            </div>
+            </div> */}
 
-            <div>
-              <button onClick={handleClickUpdateUser}>SAVE</button>
+            <div className="flex justify-center">
+              <button
+                className="mt-5 mb-5 bg-black text-white pt-2 pb-2 pl-4 pr-4 rounded-md"
+                onClick={handleClickUpdateUser}
+              >
+                SAVE
+              </button>
             </div>
           </div>
         </div>

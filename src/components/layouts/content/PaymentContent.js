@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "../../../config/axios";
-import { useCart } from "../../../context/CartContext";
 
 function PaymentContent() {
   const [addSlip, setAddSlip] = useState(null);
@@ -23,25 +22,30 @@ function PaymentContent() {
 
   return (
     <>
-      <div className="form-control w-full max-w-xs m-auto">
-        <label className="label">
-          <span className="label-text">Payment</span>
+      <div className="form-control max-w-xs m-auto flex mt-10 mb-10">
+        <label className="flex justify-center pt-5 pb-5">
+          <span className="flex text-2xl ">Payment</span>
         </label>
         <div>
-          <h1>Account number: 1203-XXX-XXX </h1>
+          <h1 className="">Account number: 1203-XXX-XXX </h1>
         </div>
         <input
           type="file"
           placeholder="Type here"
-          className="input input-bordered input-m w-full max-w-xs"
+          className="input input-bordered input-m w-full max-w-xs mt-5"
           onChange={(e) => {
             if (e.target.files[0]) {
               setAddSlip(e.target.files[0]);
             }
           }}
         />
-        <div>
-          <button onClick={handleClickAddSlip}>SUBMIT</button>
+        <div className="flex justify-center mt-10 ">
+          <button
+            onClick={handleClickAddSlip}
+            className="bg-black text-white rounded-md pt-2 pb-2 hover:bg-gray-700 pr-5 pl-5"
+          >
+            SUBMIT
+          </button>
         </div>
       </div>
     </>

@@ -4,10 +4,10 @@ import Footer from "../layouts/Footer";
 
 function AllProductPage() {
   return (
-    <>
+    <div className="">
       <AllProductContent />
       <Footer />
-    </>
+    </div>
   );
 }
 

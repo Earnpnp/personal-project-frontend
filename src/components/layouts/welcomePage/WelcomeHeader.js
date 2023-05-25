@@ -2,6 +2,9 @@ import React from "react";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthContext";
+import { FiX } from "react-icons/fi";
+
+import logo from "../../../assets/images/logo.gif";
 
 function WelcomeHeader({}) {
   const [name, setName] = useState("");
@@ -14,7 +17,6 @@ function WelcomeHeader({}) {
   const navigate = useNavigate();
 
   const { signUp, login } = useContext(AuthContext);
-
   const handleSubmitSignUp = async (e) => {
     try {
       e.preventDefault();
@@ -44,16 +46,15 @@ function WelcomeHeader({}) {
   return (
     <div className="px-2 sm:px-4 py-2.5 rounded">
       <div className="container flex flex-wrap justify-between items-center mx-auto">
-        <a
-          href="*"
-          className="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-gray-300 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-        >
-          SLEEPYHEAD
-        </a>
+        <div className="logo-left">
+          <a href="/" className="logo">
+            <img src={logo} alt="logo" className="h-20" />
+          </a>
+        </div>
         <div className="flex md:order-2">
           <button
             type="button"
-            className="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-gray-300 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+            className="text-white bg-gray-900 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-md px-5 py-2.5 text-center mr-3 md:mr-0"
             onClick={() => setSignUpModal(true)}
           >
             CREATE AN ACCOUNT
@@ -61,33 +62,15 @@ function WelcomeHeader({}) {
 
           <button
             type="button"
-            className="text-white bg-gray-900 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0"
+            className="text-black hover:text-gray-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-md px-5 py-2.5 text-center mr-3 md:mr-0"
             onClick={() => setLoginModal(true)}
           >
             LOGIN
           </button>
         </div>
-        <div>
-          <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
-            <li>
-              <a
-                href="/allproduct"
-                className="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-gray-300 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-              >
-                ALL PRODUCTS
-              </a>
-            </li>
-            <li>
-              <a
-                href="/contactus"
-                className="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-gray-300 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-              >
-                CONTACT US
-              </a>
-            </li>
-          </ul>
-        </div>
       </div>
+
+      {/* Login */}
       {loginModal ? (
         <>
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
@@ -95,20 +78,19 @@ function WelcomeHeader({}) {
               {/*content*/}
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none pr-8 pl-8">
                 {/*header*/}
-                <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-                  <h3 className="text-center text-2xl font-bold">LOGIN</h3>
-                  <button
-                    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                    type="button"
-                    onClick={() => setLoginModal(false)}
-                  >
-                    X
-                  </button>
-                  <button
-                    className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                    onClick={() => setLoginModal(false)}
-                  ></button>
+                <div className="flex justify-between mt-5 mb-5 rounded-t">
+                  <div className="flex">
+                    <h3 className="text-2xl font-bold ">LOGIN</h3>
+                  </div>
+
+                  <div className="">
+                    <FiX
+                      className="text-red-500 font-bold cursor-pointer mt-2"
+                      onClick={() => setLoginModal(false)}
+                    />
+                  </div>
                 </div>
+
                 {/*body*/}
                 <div>
                   <label
@@ -122,7 +104,6 @@ function WelcomeHeader({}) {
                     name="email"
                     id="email"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                    placeholder="Please enter your Email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
@@ -143,17 +124,9 @@ function WelcomeHeader({}) {
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
-                {/* <div className="flex justify-between">
-                  <a
-                    href="/forgotpassword"
-                    className="text-xs text-gray-900 hover:underline mt-3"
-                  >
-                    FORGOT YOU R PASSWORD ?
-                  </a>
-                </div> */}
 
                 {/*footer*/}
-                <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+                <div className="flex mt-5 mb-5 rounded-b justify-center">
                   <button
                     className="text-white bg-gray-900 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0"
                     type="button"
@@ -161,14 +134,6 @@ function WelcomeHeader({}) {
                   >
                     LOGIN
                   </button>
-                  {/* <div className="flex justify-between">
-                    <a
-                      href="/signup"
-                      className="text-xs text-gray-900 hover:underline mt-3"
-                    >
-                      CREATE AN ACCOUNT
-                    </a>
-                  </div> */}
                 </div>
               </div>
             </div>
@@ -185,20 +150,19 @@ function WelcomeHeader({}) {
               {/*content*/}
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none pr-8 pl-8">
                 {/*header*/}
-                <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-                  <h3 className="text-center text-2xl font-bold">SIGN UP</h3>
-
-                  {/* <div className="text-center text-m font-bold">
-                    ALREADY HAVE AN ACCOUNT
-                    <a href="/login" className="ml-2 text-sm text-gray-500">
-                      LOGIN
-                    </a>
+                <div className="flex justify-between mt-5 mb-5 rounded-t">
+                  <div className="flex">
+                    <h3 className="text-2xl font-bold ">SIGN UP</h3>
                   </div>
-                  <button
-                    className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                    onClick={() => setSignUpModal(false)}
-                  ></button> */}
+
+                  <div className="">
+                    <FiX
+                      className="text-red-500 font-bold cursor-pointer mt-2"
+                      onClick={() => setSignUpModal(false)}
+                    />
+                  </div>
                 </div>
+
                 {/*body*/}
                 <div>
                   <label
@@ -214,6 +178,7 @@ function WelcomeHeader({}) {
                     onChange={(e) => setName(e.target.value)}
                   />
                 </div>
+
                 <div>
                   <label
                     htmlFor=""
@@ -276,14 +241,7 @@ function WelcomeHeader({}) {
                 </div>
 
                 {/*footer*/}
-                <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
-                  <button
-                    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                    type="button"
-                    onClick={() => setSignUpModal(false)}
-                  >
-                    Close
-                  </button>
+                <div className="flex mt-5 mb-5 rounded-b justify-center">
                   <button
                     className="text-white bg-gray-900 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0"
                     type="button"
@@ -295,7 +253,6 @@ function WelcomeHeader({}) {
               </div>
             </div>
           </div>
-          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </>
       ) : null}
     </div>
