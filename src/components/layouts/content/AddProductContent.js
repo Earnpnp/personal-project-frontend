@@ -29,19 +29,21 @@ function AddProductContent() {
 
   return (
     <>
-      <div>
-        <div className="form-control w-full max-w-xs">
-          <label className="label">
-            <span className="label-text">Product Name</span>
-          </label>
-          <input
-            type="text"
-            placeholder="Type here"
-            className="input input-bordered input-sm w-full max-w-xs"
-            onChange={(e) => setNameProduct(e.target.value)}
-            value={nameProduct}
-          />
-        </div>
+      <div className="form-control max-w-xs m-auto flex mt-10 mb-10">
+        <label className="flex justify-center pt-5 pb-5">
+          <span className="flex text-2xl font-bold">Add Product</span>
+        </label>
+        <label className="label">
+          <span className="label-text">Product Name</span>
+        </label>
+        <input
+          type="text"
+          placeholder="Type here"
+          className="input input-bordered input-sm w-full max-w-xs"
+          onChange={(e) => setNameProduct(e.target.value)}
+          value={nameProduct}
+        />
+
         <div className="form-control w-full max-w-xs">
           <label className="label">
             <span className="label-text">Type</span>
@@ -90,8 +92,13 @@ function AddProductContent() {
           />
         </div>
 
-        <div>
-          <button onClick={handleClickAdd}>ADD</button>
+        <div className="flex justify-center mt-10 mb-10">
+          <button
+            onClick={handleClickAdd}
+            className="bg-black text-white rounded-md pt-2 pb-2 hover:bg-gray-700 pr-5 pl-5"
+          >
+            ADD
+          </button>
         </div>
       </div>
     </>
